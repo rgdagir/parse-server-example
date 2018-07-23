@@ -1,27 +1,23 @@
-Parse.Cloud.define('pushChannelTest', function(request, response) {
+Parse.Cloud.define('pushNotificationGeneral', function(request, response) {
 
   // request has 2 parameters: params passed by the client and the authorized user
   var params = request.params;
   var user = request.user;
 
-  var customData = params.customData;
-  var launch = params.launch;
-  var broadcast = params.broadcast;
+  var newMatchData = params.newMatchData;
+  var newMessageData = params.newMessageData;
 
-  // use to custom tweak whatever payload you wish to send
+  // set audience of push notification and data
   var pushQuery = new Parse.Query(Parse.Installation);
   pushQuery.equalTo("deviceType", "android");
 
   var payload = {};
 
-  if (customData) {
-      payload.customdata = customData;
+  if (newMatchData) {
+      payload.mydata = newMatchData;
   }
-  else if (launch) {
-      payload.launch = launch;
-  }
-  else if (broadcast) {
-      payload.broadcast = broadcast;
+  if (newMessageData) {
+      payload.mydata = newMessageData;
   }
 
   // Note that useMasterKey is necessary for Push notifications to succeed.
