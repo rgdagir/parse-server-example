@@ -4,8 +4,7 @@ Parse.Cloud.define('pushNotificationGeneral', function(request, response) {
   var params = request.params;
   var user = request.user;
 
-  var newMatchData = params.newMatchData;
-  var newMessageData = params.newMessageData;
+  var newData = params.newData;
 
   // set audience of push notification and data
   var pushQuery = new Parse.Query(Parse.Installation);
@@ -13,11 +12,8 @@ Parse.Cloud.define('pushNotificationGeneral', function(request, response) {
 
   var payload = {};
 
-  if (newMatchData) {
-      payload.mydata = newMatchData;
-  }
-  if (newMessageData) {
-      payload.mydata = newMessageData;
+  if (newData) {
+      payload.mydata = newData;
   }
 
   // Note that useMasterKey is necessary for Push notifications to succeed.
