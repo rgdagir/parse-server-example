@@ -5,7 +5,8 @@ Parse.Cloud.define('pushNotificationGeneral', function(request, response) {
   var user = request.user;
 
   var newData = params.newData;
-  var receiver = params.receiver;
+  var receiverPackage = params.receiver;
+  var receiver = JSON.parse(receiverPackage).receiverId;
 
   // set audience of push notification and data
   var pushQuery = new Parse.Query(Parse.Installation);
