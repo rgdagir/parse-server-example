@@ -11,6 +11,7 @@ Parse.Cloud.define('pushNotificationGeneral', function(request, response) {
   var pushQuery = new Parse.Query(Parse.Installation);
   if (receiver) {
     pushQuery.equalTo("currentUserId", receiver);
+    console.log(receiver);
   } else {
     pushQuery.equalTo("deviceType", "android");
   }
@@ -21,6 +22,7 @@ Parse.Cloud.define('pushNotificationGeneral', function(request, response) {
       payload.mydata = newData;
   }
 
+  console.log(pushQuery.toString());
   Parse.Push.send({
   where: pushQuery,      // for sending to a specific channel
   data: payload,
